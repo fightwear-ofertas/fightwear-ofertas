@@ -10,7 +10,8 @@
 <meta property="og:description" content="Produtos úteis, novidades e recomendações para o dia a dia.">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary">
-<!-- Canonical: adicione <link rel="canonical" href="https://SEU-DOMINIO"> somente quando tiver um domínio real. -->
+<link rel="canonical" href="https://fightwear-ofertas.github.io/fightwear-ofertas/">
+<meta property="og:url" content="https://fightwear-ofertas.github.io/fightwear-ofertas/">
 <style>
 :root{--bg:#0b0b0b;--card:#151515;--line:#2a2a2a;--tx:#fff;--mut:#a8a8a8;--or:#ff6a00;--or2:#ff8a2b;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
@@ -124,7 +125,7 @@ summary{cursor:pointer;font-weight:700;color:var(--tx)}
 
  <section id="recomendados" class="rec"><div class="wrap">
   <h2>Achadinhos que merecem sua <i>atenção</i></h2>
-  <p class="sub">Uma seleção para destacar. Marque produtos com destaque: true para aparecerem aqui.</p>
+  <p class="sub">Uma seleção para você conferir.</p>
   <div class="grid" id="recGrid"></div>
  </div></section>
 
@@ -179,12 +180,11 @@ const CATEGORIAS = [
  - exemplo: true marca como exemplo fictício. Apague essa linha nos produtos reais.
 */
 const PRODUTOS = [
-  {id:1, nome:"Produto exemplo de Tecnologia", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"tecnologia", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:true, exemplo:true},
-  {id:2, nome:"Produto exemplo de Casa", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"casa", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:false, exemplo:true},
-  {id:3, nome:"Produto exemplo de Acessório", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"acessorios", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:true, exemplo:true},
-  {id:4, nome:"Produto exemplo de Esporte", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"esporte", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:true, exemplo:true},
-  {id:5, nome:"Produto exemplo de Beleza", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"beleza", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:false, exemplo:true},
-  {id:6, nome:"Produto exemplo Variado", descricao:"Espaço para uma breve descrição do produto. Substitua por um item real.", categoria:"variados", imagem:"", preco:"", precoAtualizadoEm:"", disponibilidade:"verificar", link:"", destaque:false, exemplo:true}
+  {id:1, nome:"Parafusadeira/Furadeira Falasca 21 V", descricao:"Kit anunciado como parafusadeira e furadeira a bateria de 21 V. Veja no anúncio o que acompanha o kit.", categoria:"casa", imagem:"", preco:"R$ 129,80", precoAtualizadoEm:"2026-10-24", disponibilidade:"verificar", link:"https://s.shopee.com.br/8V9xvRgT0U", destaque:true},
+  {id:2, nome:"Bicicleta GT Sprint MX7 aro 29", descricao:"Bicicleta aro 29. Confira no anúncio o tamanho do quadro, os componentes, o frete e a montagem.", categoria:"esporte", imagem:"", preco:"R$ 799,00", precoAtualizadoEm:"2026-10-24", disponibilidade:"verificar", link:"https://s.shopee.com.br/6VOtXhKy1i", destaque:false},
+  {id:3, nome:"Smartwatch Série 10, 45 mm", descricao:"Modelo de 45 mm. Confira no anúncio a compatibilidade com o seu celular e as funções disponíveis.", categoria:"tecnologia", imagem:"", preco:"R$ 139,90 a R$ 159,90", precoAtualizadoEm:"2026-10-24", disponibilidade:"verificar", link:"https://s.shopee.com.br/BUq0169P0", destaque:true},
+  {id:4, nome:"Shorts Masculino Tactel", descricao:"Shorts masculino de tactel. Veja a tabela de medidas e as cores no anúncio.", categoria:"esporte", imagem:"", preco:"R$ 35,00", precoAtualizadoEm:"2026-10-24", disponibilidade:"verificar", link:"https://s.shopee.com.br/5q9CjninmF", destaque:false},
+  {id:5, nome:"Bola Topper Ultra Futsal", descricao:"Bola de futsal. Confira no anúncio a categoria, o tamanho e as características.", categoria:"esporte", imagem:"", preco:"R$ 72,90 a R$ 74,80", precoAtualizadoEm:"2026-10-24", disponibilidade:"verificar", link:"https://s.shopee.com.br/7puH84iJGu", destaque:true}
 ];
 
 /* ============ LÓGICA ============ */
@@ -209,13 +209,13 @@ function cardHTML(p, i){
   const c = catById(p.categoria);
   const ok = linkValido(p.link);
   const verificado = p.precoAtualizadoEm && dataBR(p.precoAtualizadoEm);
-  const preco = p.preco && verificado ? `<div class="price">${esc(p.preco)}<em>Preço verificado em ${verificado}</em></div>` : "";
+  const preco = p.preco && verificado ? `<div class="price">${esc(p.preco)}<em>Preço consultado em ${verificado}</em></div>` : "";
   const st = p.disponibilidade === "disponivel" ? `<span class="st ok">Disponível</span>` : p.disponibilidade === "indisponivel" ? `<span class="st no">Indisponível no momento</span>` : "";
   const btn = ok
-    ? `<a class="btn" href="${esc(p.link)}" target="_blank" rel="sponsored noopener noreferrer">Ver na Shopee →</a><p class="note">Pode render comissão, sem custo adicional para você.</p>`
+    ? `<a class="btn" href="${esc(p.link)}" target="_blank" rel="sponsored noopener noreferrer">Ver oferta →</a><p class="note">Pode render comissão, sem custo adicional para você.</p>`
     : `<button class="btn off" disabled aria-disabled="true">Link em breve</button>`;
   return `<article class="card" style="animation-delay:${Math.min(i,8)*50}ms">
-   <div class="im"><img src="${esc(p.imagem || placeholder(p))}" alt="${esc(p.exemplo ? "Imagem ilustrativa de exemplo: " + p.nome : p.nome)}" width="640" height="480" loading="lazy" decoding="async">${p.exemplo ? '<span class="ex">EXEMPLO</span>' : ""}</div>
+   <div class="im"><img src="${esc(p.imagem || placeholder(p))}" alt="${esc(p.imagem ? p.nome : "Ilustração da categoria " + c.nome + ": " + p.nome)}" width="640" height="480" loading="lazy" decoding="async">${p.exemplo ? '<span class="ex">EXEMPLO</span>' : ""}</div>
    <div class="cb"><small>${c.icone} ${esc(c.nome)}</small><h3>${esc(p.nome)}</h3><p>${esc(p.descricao)}</p>${preco}${st}${btn}</div></article>`;
 }
 
@@ -242,7 +242,7 @@ document.querySelector('a[href="#privacidade"]').addEventListener("click", () =>
 if(location.hash === "#privacidade") $("#privacidade").open = true;
 const dest = PRODUTOS.filter(p => p.destaque);
 $("#recGrid").innerHTML = dest.length ? dest.map(cardHTML).join("") : `<div class="empty" style="grid-column:1/-1"><strong>Em breve</strong>Os destaques da semana vão aparecer aqui.</div>`;
-$("#disc1").textContent = "Este site pode receber comissões por compras realizadas por meio de determinados links, sem custo adicional para o comprador. Os produtos marcados como EXEMPLO são apenas demonstração do layout.";
+$("#disc1").textContent = "Este site pode receber comissões por compras realizadas por meio de determinados links, sem custo adicional para o comprador. Preços e avaliações mudam: confira sempre o valor atualizado, o estoque e as especificações no anúncio antes de comprar.";
 if(CONFIG.contato){ const a = document.createElement("a"); a.href = "mailto:" + CONFIG.contato; a.textContent = "Contato: " + CONFIG.contato; $("#contato").appendChild(a); }
 renderCats(); render();
 </script>
